@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.20)
+project(grevir_encoder_consumer LANGUAGES CXX)
+find_package(grevir-encoder CONFIG REQUIRED)
+add_executable(grevir_encoder_consumer main.cpp)
+target_link_libraries(grevir_encoder_consumer PRIVATE grevir::encoder)
+set_target_properties(grevir_encoder_consumer PROPERTIES CXX_EXTENSIONS OFF)
