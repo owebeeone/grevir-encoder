@@ -1,5 +1,15 @@
 # Grevir Encoder
 
+**Public API:** [Grevir Encoder](https://github.com/owebeeone/grevir-wz/blob/main/docs/api/encoder.md).
+See [installation](https://github.com/owebeeone/grevir-wz/blob/main/docs/install.md) and
+[supported platforms](https://github.com/owebeeone/grevir-wz/blob/main/docs/supported.md).
+The workspace `/docs` is the current user-facing contract; development
+checkpoints below are historical.
+
+Quadrature decoding and a module wrapper for injected pins.
+
+## Development record (historical)
+
 Quadrature decoding, optional interactive scaling and a Core module wrapper,
 extracted from Ardoinus `ardOQuadEncoder`. Public types retain the `quad` names
 and original scaler spellings. Pins and clocks are injected; the package has no
