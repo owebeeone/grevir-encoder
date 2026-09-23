@@ -17,19 +17,29 @@ using Encoder = quad::QuadEncoder<PinA, PinB>;
 using Scaled = quad::QuadEncoder<PinA, PinB, quad::InteractiveScaler<Clock>>;
 using Module = quad::QuadEncoderModule<Encoder>;
 struct Access : quad::QuadEncoderBase {
-  using quad::QuadEncoderBase::Action;
-  using quad::QuadEncoderBase::decodeAction;
+  static constexpr bool unchanged(State index) {
+    return decodeAction(index) == Action::unchanged;
+  }
+  static constexpr bool increment(State index) {
+    return decodeAction(index) == Action::increment;
+  }
+  static constexpr bool decrement(State index) {
+    return decodeAction(index) == Action::decrement;
+  }
+  static constexpr bool indeterminate(State index) {
+    return decodeAction(index) == Action::indeterminate;
+  }
 };
 }
 
-static_assert(Access::decodeAction(0) == Access::Action::unchanged);
-static_assert(Access::decodeAction(1) == Access::Action::increment);
-static_assert(Access::decodeAction(2) == Access::Action::decrement);
-static_assert(Access::decodeAction(3) == Access::Action::indeterminate);
-static_assert(Access::decodeAction(7) == Access::Action::increment);
-static_assert(Access::decodeAction(14) == Access::Action::increment);
-static_assert(Access::decodeAction(8) == Access::Action::increment);
-static_assert(Access::decodeAction(4) == Access::Action::decrement);
+static_assert(Access::unchanged(0));
+static_assert(Access::increment(1));
+static_assert(Access::decrement(2));
+static_assert(Access::indeterminate(3));
+static_assert(Access::increment(7));
+static_assert(Access::increment(14));
+static_assert(Access::increment(8));
+static_assert(Access::decrement(4));
 
 void instantiate_encoder() {
   ardo::Application<Module>::runSetup();
